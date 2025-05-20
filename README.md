@@ -32,8 +32,8 @@ This project follows **SOLID principles**, Domain-Driven Design (DDD) practices,
 ### 1. Clone the repository
 
 ````bash
-git clone https://github.com/kolawolejohn/task-management-api.git
-cd task-management-api
+git clone https://github.com/kolawolejohn/menaget-task-management-api.git
+cd menaget-task-management-api
 
 Install dependencies:
 
@@ -131,7 +131,7 @@ Each endpoint is fully documented with:
 API Base URL: http://localhost:3000
 Swagger Docs: http://localhost:3000/api-docs
 
-#  Client-Side Ably Subscription (Token Auth)
+# Client-Side Ably Subscription (Token Auth)
 
 <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
 <script>
@@ -156,10 +156,10 @@ Swagger Docs: http://localhost:3000/api-docs
     });
 </script>
 
-
 ## productions
 
 ## Stay in touch
 
 - Author - [Kolawole John](https://twitter.com/kolawole_john)
+
 # menaget-task-management-api
