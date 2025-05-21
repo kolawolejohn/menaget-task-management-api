@@ -19,11 +19,12 @@ A simple task management API built with [NestJS](https://nestjs.com), TypeORM, P
 
 This project follows **SOLID principles**, Domain-Driven Design (DDD) practices, and a modular folder structure. Key highlights:
 
-- **Single Responsibility**: Each service/controller handles one concern.
-- **Dependency Injection**: Powered by NestJS's built-in DI container.
-- **Loose Coupling**: Business logic is separated from infrastructure.
+- **Single Responsibility**: Each service/controller handles one concern. Each class (controller, service, dto) focuses on a specific domain concern — for example, TaskService handles only task-related logic, while SchedulerService manages cron operations.
+- **Dependency Injection**: Powered by NestJS's built-in DI container. NestJS uses a built-in IoC (Inversion of Control) container to manage dependencies.
+Classes declare their dependencies via constructors, and Nest resolves them — enabling testability, flexibility, and decoupling.
+- **Loose Coupling**: Business logic is separated from infrastructure. Business logic is abstracted from infrastructure concerns (e.g., database, schedulers, Ably pub/sub). This allows easy refactoring or swapping implementations.
 - **Scalable Structure**: Organized into feature modules (`tasks`, `ably`, `scheduler`, `common` etc).
-- **Clarity of purpose**: There is a clear separation of concerns for the environments, either local, production or docker
+- **Environment-Aware Confige**: The codebase is environment-conscious — handling differences between local, Docker, and Render (production) seamlessly via .env, entrypoint.sh, and NODE_ENV.
 
 ---
 
@@ -45,10 +46,8 @@ $ npm install
 
 ```bash
 # locally
-$ npm run start
-
 # watch mode
-$ npm run start:dev
+$ npm run start:dev or yarn start:dev
 
 # production mode
 $ npm run start:prod
@@ -79,6 +78,10 @@ $ docker-compose up --build
 # for docker the migration is ran on startup and it is indempotent
 $ docker exec -it task_manager_app_container npm run seed:docker
 ```
+
+## NB
+
+You do not need to run migrations on production and docker as this has been handle on startup, however, no need to seed data for production... Just enjoy using the application
 
 🔁 Run in Background
 
@@ -126,6 +129,11 @@ Each endpoint is fully documented with:
 
 🌐 App URLs
 
+## Production
+
+API_BASE_URL: https://menaget-task-management-api.onrender.com/
+Swagger Docs: https://menaget-task-management-api.onrender.com/api-docs
+
 ## local
 
 API Base URL: http://localhost:3000
@@ -136,7 +144,7 @@ Swagger Docs: http://localhost:3000/api-docs
 <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
 <script>
   // Replace with your backend token endpoint
-  const tokenEndpoint = 'https://your-api-url.com/ably/token';
+  const tokenEndpoint = 'https://menaget-task-management-api.onrender.com/ably/token';
 
   fetch(tokenEndpoint)
     .then((res) => res.json())
