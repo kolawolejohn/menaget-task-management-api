@@ -13,7 +13,7 @@ if [ "$NODE_ENV" = "docker" ]; then
 
 elif [ "$NODE_ENV" = "production" ]; then
   echo "Running production migration..."
-  npx typeorm migration:run
+  npm run migrate:prod
 
 else
   echo "⚠️  Unknown NODE_ENV: '$NODE_ENV'. Skipping DB wait and migrations."
