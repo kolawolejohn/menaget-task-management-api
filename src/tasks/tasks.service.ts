@@ -51,14 +51,14 @@ export class TasksService {
       query.andWhere('task.title ILIKE :search', { search: `%${search}%` });
     }
 
-    const [data, total] = await query.skip(skip).take(take).getManyAndCount();
+    const [items, total] = await query.skip(skip).take(take).getManyAndCount();
 
     const totalPages = Math.ceil(total / take);
     const nextPage = page < totalPages ? page + 1 : null;
     const prevPage = page > 1 ? page - 1 : null;
 
     return {
-      data,
+      items,
       total,
       currentPage: page,
       nextPage,
